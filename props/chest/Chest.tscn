@@ -1,0 +1,152 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://interface/fonts/pixellari.tres" type="DynamicFont" id=1]
+[ext_resource path="res://props/chest/Chest.gd" type="Script" id=3]
+[ext_resource path="res://props/chest/chest_3.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 36, 33.5 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("StaticBody2D/CollisionShape2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StaticBody2D/CollisionShape2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.4, 0.4 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Chest:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "loot"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("StaticBody2D/CollisionShape2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StaticBody2D/CollisionShape2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.4, 0.4 ), Vector2( 0.4, 0.4 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Chest:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Curve2D" id=4]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -0.386932, -0.414749, 14.8441, 0.115172, -14.8441, -0.115172, -18.5849, -12.1008, 0.826407, -1.30566, -0.826407, 1.30566, -37.4085, 0.840334 )
+}
+
+[node name="Chest" type="Area2D"]
+scale = Vector2( 0.85, 0.85 )
+collision_layer = 0
+monitorable = false
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 3.8147e-06 )
+scale = Vector2( 0.7, 0.7 )
+shape = SubResource( 1 )
+
+[node name="Chest" type="Sprite" parent="."]
+position = Vector2( 0, -1.42857 )
+texture = ExtResource( 4 )
+hframes = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+scale = Vector2( 0.4, 0.4 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+anims/RESET = SubResource( 3 )
+anims/loot = SubResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2( 0.5, 4.706 )
+curve = SubResource( 4 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( -0.386932, -0.414749 )
+rotate = false
+loop = false
+
+[node name="Label" type="Label" parent="."]
+visible = false
+margin_left = -14.1176
+margin_top = -30.5882
+margin_right = 13.8824
+margin_bottom = -6.58824
+custom_fonts/font = ExtResource( 1 )
+text = "(F)"
+align = 1
+valign = 1
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false
+position = Vector2( 4.76837e-07, -7.15256e-07 )
+scale = Vector2( 1.57143, 1.71429 )
+
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://rooms/spawners/Spawner.gd" type="Script" id=1]
+[ext_resource path="res://rooms/spawners/spawner_mob.svg" type="Texture" id=2]
+[ext_resource path="res://alternatives/for_use/mobs/shield/Shield.tscn" type="PackedScene" id=3]
+[ext_resource path="res://alternatives/for_use/mobs/sword/Sword.tscn" type="PackedScene" id=4]
+[ext_resource path="res://mobs/bomb/Bomb.tscn" type="PackedScene" id=5]
+[ext_resource path="res://mobs/dummy/Dummy.tscn" type="PackedScene" id=6]
+
+[node name="SpawnerMob" type="Sprite"]
+position = Vector2( -1, 0 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+list = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ]

@@ -1,0 +1,309 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://rooms/spawners/SpawnerMob.tscn" type="PackedScene" id=1]
+[ext_resource path="res://mobs/dummy/Dummy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://mobs/bomb/Bomb.tscn" type="PackedScene" id=3]
+[ext_resource path="res://props/chest/Chest.tscn" type="PackedScene" id=4]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://interface/CanvasLayer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://entities/npcs/NPC.tscn" type="PackedScene" id=7]
+[ext_resource path="res://interface/fonts/pixellari.tres" type="DynamicFont" id=8]
+[ext_resource path="res://rooms/TestRoom.gd" type="Script" id=9]
+[ext_resource path="res://interface/fonts/Pixellari.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://rooms/ItemsLayer.gd" type="Script" id=11]
+[ext_resource path="res://mobs/bat/Bat.tscn" type="PackedScene" id=12]
+[ext_resource path="res://pickups/items/Potion.tscn" type="PackedScene" id=13]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=2]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=3]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 10 )
+
+[node name="TestRoom" type="Node2D"]
+script = ExtResource( 9 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Mobs" type="YSort" parent="YSort"]
+
+[node name="Dummy" parent="YSort/Mobs" instance=ExtResource( 2 )]
+position = Vector2( 340, 26 )
+health = -9223372036854775808
+
+[node name="Bats" type="YSort" parent="YSort/Mobs"]
+position = Vector2( 515, 98 )
+
+[node name="Spawner" parent="YSort/Mobs/Bats" instance=ExtResource( 1 )]
+position = Vector2( -2, 0 )
+list = [ ExtResource( 12 ) ]
+
+[node name="Timer" type="Timer" parent="YSort/Mobs/Bats"]
+wait_time = 15.0
+one_shot = true
+
+[node name="Bombs" type="YSort" parent="YSort/Mobs"]
+
+[node name="Spawner" parent="YSort/Mobs/Bombs" instance=ExtResource( 1 )]
+position = Vector2( 168, 311 )
+list = [ ExtResource( 3 ) ]
+
+[node name="Timer" type="Timer" parent="YSort/Mobs/Bombs"]
+wait_time = 5.0
+one_shot = true
+
+[node name="Props" type="YSort" parent="YSort"]
+
+[node name="Chest" parent="YSort/Props" instance=ExtResource( 4 )]
+position = Vector2( 109, 23 )
+
+[node name="Items" type="YSort" parent="YSort"]
+scale = Vector2( 0.85, 0.85 )
+script = ExtResource( 11 )
+
+[node name="Potion" parent="YSort/Items" instance=ExtResource( 13 )]
+visible = false
+position = Vector2( 138.824, 178.824 )
+scale = Vector2( 1.176, 1.176 )
+
+[node name="Labels" type="Node2D" parent="YSort"]
+
+[node name="TESTROOM" type="Label" parent="YSort/Labels"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 119.0
+margin_right = 316.0
+margin_bottom = 173.0
+custom_fonts/font = ExtResource( 8 )
+text = "                       TEST ROOM
+
+  room to test different in-game mechanics."
+
+[node name="REQUIREMENTS" type="Label" parent="YSort/Labels"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 331.0
+margin_top = -13.0
+margin_right = 757.0
+margin_bottom = 193.0
+custom_fonts/font = ExtResource( 8 )
+text = "Requirements [0] :
+
+- Melee Character /w 2-Skills
+- Critical-Chance /w Weapons
+- Basic Enemy with Spawners
+- Hard-Coded Level
+- Enemy-Loot & Chests-Loot
+- Leveling- / Health- / Mana- / Stamina- / Attribute-System
+- Basic User-Interface
+- Inventory & Equip
+- Save & Load Game"
+
+[node name="BOMB_AREA" type="Node2D" parent="YSort/Labels"]
+
+[node name="TEXT" type="Label" parent="YSort/Labels/BOMB_AREA"]
+visible = false
+margin_left = 125.0
+margin_top = 183.0
+margin_right = 212.0
+margin_bottom = 199.0
+custom_fonts/font = SubResource( 1 )
+text = "BOMB AREA"
+
+[node name="Arrow" type="Node2D" parent="YSort/Labels/BOMB_AREA/TEXT"]
+position = Vector2( 45, -12 )
+
+[node name="Label" type="Label" parent="YSort/Labels/BOMB_AREA/TEXT/Arrow"]
+margin_left = 7.0
+margin_top = -12.0
+margin_right = 26.0
+margin_bottom = 4.0
+rect_rotation = 90.0
+custom_fonts/font = SubResource( 2 )
+text = "->"
+
+[node name="Radius Showcase" type="Node2D" parent="YSort/Labels/BOMB_AREA"]
+modulate = Color( 1, 0.129412, 0.129412, 0.54902 )
+position = Vector2( 27, 59 )
+
+[node name="Center" type="Node2D" parent="YSort/Labels/BOMB_AREA/Radius Showcase"]
+
+[node name="0" type="ColorRect" parent="YSort/Labels/BOMB_AREA/Radius Showcase/Center"]
+margin_left = 61.0
+margin_top = 176.0
+margin_right = 223.0
+margin_bottom = 331.0
+color = Color( 0.980392, 0.882353, 0.882353, 1 )
+
+[node name="Sides" type="Node2D" parent="YSort/Labels/BOMB_AREA/Radius Showcase"]
+
+[node name="0" type="ColorRect" parent="YSort/Labels/BOMB_AREA/Radius Showcase/Sides"]
+margin_left = 100.0
+margin_top = 176.0
+margin_right = 122.0
+margin_bottom = 260.0
+rect_rotation = -90.0
+color = Color( 0.980392, 0.882353, 0.882353, 1 )
+
+[node name="1" type="ColorRect" parent="YSort/Labels/BOMB_AREA/Radius Showcase/Sides"]
+margin_left = 100.0
+margin_top = 353.0
+margin_right = 122.0
+margin_bottom = 437.0
+rect_rotation = -90.0
+color = Color( 0.980392, 0.882353, 0.882353, 1 )
+
+[node name="2" type="ColorRect" parent="YSort/Labels/BOMB_AREA/Radius Showcase/Sides"]
+margin_left = 223.0
+margin_top = 210.0
+margin_right = 244.0
+margin_bottom = 294.0
+color = Color( 0.980392, 0.882353, 0.882353, 1 )
+
+[node name="3" type="ColorRect" parent="YSort/Labels/BOMB_AREA/Radius Showcase/Sides"]
+margin_left = 39.0
+margin_top = 210.0
+margin_right = 61.0
+margin_bottom = 294.0
+color = Color( 0.980392, 0.882353, 0.882353, 1 )
+
+[node name="Corners" type="Node2D" parent="YSort/Labels/BOMB_AREA/Radius Showcase"]
+
+[node name="0" type="ColorRect" parent="YSort/Labels/BOMB_AREA/Radius Showcase/Corners"]
+margin_left = 47.0
+margin_top = 294.0
+margin_right = 61.0
+margin_bottom = 318.0
+color = Color( 0.980392, 0.882353, 0.882353, 1 )
+
+[node name="1" type="ColorRect" parent="YSort/Labels/BOMB_AREA/Radius Showcase/Corners"]
+margin_left = 47.0
+margin_top = 186.0
+margin_right = 61.0
+margin_bottom = 210.0
+color = Color( 0.980392, 0.882353, 0.882353, 1 )
+
+[node name="2" type="ColorRect" parent="YSort/Labels/BOMB_AREA/Radius Showcase/Corners"]
+margin_left = 223.0
+margin_top = 186.0
+margin_right = 237.0
+margin_bottom = 210.0
+color = Color( 0.980392, 0.882353, 0.882353, 1 )
+
+[node name="3" type="ColorRect" parent="YSort/Labels/BOMB_AREA/Radius Showcase/Corners"]
+margin_left = 223.0
+margin_top = 294.0
+margin_right = 237.0
+margin_bottom = 318.0
+color = Color( 0.980392, 0.882353, 0.882353, 1 )
+
+[node name="4" type="ColorRect" parent="YSort/Labels/BOMB_AREA/Radius Showcase/Corners"]
+margin_left = 184.0
+margin_top = 345.0
+margin_right = 198.0
+margin_bottom = 369.0
+rect_rotation = -90.0
+color = Color( 0.980392, 0.882353, 0.882353, 1 )
+
+[node name="5" type="ColorRect" parent="YSort/Labels/BOMB_AREA/Radius Showcase/Corners"]
+margin_left = 76.0
+margin_top = 345.0
+margin_right = 90.0
+margin_bottom = 369.0
+rect_rotation = -90.0
+color = Color( 0.980392, 0.882353, 0.882353, 1 )
+
+[node name="6" type="ColorRect" parent="YSort/Labels/BOMB_AREA/Radius Showcase/Corners"]
+margin_left = 76.0
+margin_top = 176.0
+margin_right = 90.0
+margin_bottom = 200.0
+rect_rotation = -90.0
+color = Color( 0.980392, 0.882353, 0.882353, 1 )
+
+[node name="7" type="ColorRect" parent="YSort/Labels/BOMB_AREA/Radius Showcase/Corners"]
+margin_left = 184.0
+margin_top = 176.0
+margin_right = 198.0
+margin_bottom = 200.0
+rect_rotation = -90.0
+color = Color( 0.980392, 0.882353, 0.882353, 1 )
+
+[node name="TimerLabel" type="Label" parent="YSort/Labels/BOMB_AREA"]
+margin_left = 153.0
+margin_top = 297.0
+margin_right = 185.0
+margin_bottom = 327.0
+custom_fonts/font = SubResource( 3 )
+align = 1
+valign = 1
+
+[node name="BATS_AREA" type="Node2D" parent="YSort/Labels"]
+
+[node name="TEXT" type="Label" parent="YSort/Labels/BATS_AREA"]
+visible = false
+margin_left = 243.0
+margin_top = 83.0
+margin_right = 327.0
+margin_bottom = 99.0
+custom_fonts/font = ExtResource( 8 )
+text = "BATS AREA"
+
+[node name="Arrow" type="Node2D" parent="YSort/Labels/BATS_AREA/TEXT"]
+position = Vector2( 91, -1 )
+
+[node name="Label" type="Label" parent="YSort/Labels/BATS_AREA/TEXT/Arrow"]
+margin_right = 19.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 2 )
+text = "->"
+
+[node name="Area Showcase" type="Node2D" parent="YSort/Labels/BATS_AREA"]
+
+[node name="ColorRect" type="ColorRect" parent="YSort/Labels/BATS_AREA/Area Showcase"]
+margin_left = 407.0
+margin_top = -19.0
+margin_right = 410.0
+margin_bottom = 204.0
+
+[node name="ColorRect2" type="ColorRect" parent="YSort/Labels/BATS_AREA/Area Showcase"]
+margin_left = 630.0
+margin_top = -22.0
+margin_right = 633.0
+margin_bottom = 201.0
+rect_rotation = 90.0
+
+[node name="ColorRect3" type="ColorRect" parent="YSort/Labels/BATS_AREA/Area Showcase"]
+margin_left = 630.0
+margin_top = 204.0
+margin_right = 633.0
+margin_bottom = 427.0
+rect_rotation = 180.0
+
+[node name="ColorRect4" type="ColorRect" parent="YSort/Labels/BATS_AREA/Area Showcase"]
+margin_left = 630.0
+margin_top = 204.0
+margin_right = 633.0
+margin_bottom = 427.0
+rect_rotation = 90.0
+
+[node name="NPCs" type="YSort" parent="YSort"]
+
+[node name="NPC" parent="YSort/NPCs" instance=ExtResource( 7 )]
+position = Vector2( 245, 92 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 5 )]
+
+[node name="Interface" parent="." instance=ExtResource( 6 )]

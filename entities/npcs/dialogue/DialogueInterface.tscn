@@ -1,0 +1,117 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://interface/fonts/Pixellari.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://entities/npcs/dialogue/DialogBG.png" type="Texture" id=2]
+[ext_resource path="res://entities/npcs/dialogue/DialogueInterface.gd" type="Script" id=3]
+[ext_resource path="res://entities/npcs/dialogue/continue_arrow.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=3]
+size = 14
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 14
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "IDLE"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 272, 157 ), Vector2( 270, 157 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 272, 157 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ) ]
+}
+
+[node name="DialogueInterface" type="CanvasLayer"]
+script = ExtResource( 3 )
+dialogue_file = "res://dialogues/jsons/dialogue_01.json"
+again_dialogue_file = "res://dialogues/jsons/dialogue_02.json"
+much_dialogue_file = "res://dialogues/jsons/dialogue_03.json"
+
+[node name="Control" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 42.0
+margin_top = 113.0
+margin_right = -186.0
+margin_bottom = -52.0
+custom_fonts/normal_font = SubResource( 3 )
+text = "Name"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+margin_left = 42.0
+margin_top = 129.0
+margin_right = 259.0
+margin_bottom = 162.0
+custom_fonts/normal_font = SubResource( 4 )
+text = "Message"
+
+[node name="Tween" type="Tween" parent="Control"]
+
+[node name="Sprite" type="Sprite" parent="Control"]
+position = Vector2( 272, 157 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Sprite"]
+autoplay = "IDLE"
+anims/IDLE = SubResource( 1 )
+anims/RESET = SubResource( 2 )
+
+[connection signal="tween_all_completed" from="Control/Tween" to="." method="_on_Tween_tween_all_completed"]

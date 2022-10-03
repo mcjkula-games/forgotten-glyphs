@@ -1,0 +1,319 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://mobs/Mob.tscn" type="PackedScene" id=1]
+[ext_resource path="res://mobs/bomb/shock_area.svg" type="Texture" id=2]
+[ext_resource path="res://mobs/bomb/explode.wav" type="AudioStream" id=3]
+[ext_resource path="res://mobs/bomb/dynamite_active.png" type="Texture" id=4]
+[ext_resource path="res://mobs/bomb/dynamite_inactive.png" type="Texture" id=5]
+[ext_resource path="res://alternatives/for_use/bullets/particle_bullet.png" type="Texture" id=6]
+[ext_resource path="res://mobs/bomb/Bomb.gd" type="Script" id=7]
+
+[sub_resource type="CircleShape2D" id=15]
+resource_local_to_scene = true
+radius = 62.5
+
+[sub_resource type="CircleShape2D" id=16]
+resource_local_to_scene = true
+radius = 92.5
+
+[sub_resource type="CircleShape2D" id=17]
+radius = 13.0384
+
+[sub_resource type="Animation" id=3]
+resource_name = "explode"
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.746589, 0.884575 ), Vector2( 1.25, 1.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, -1 ), Vector2( -1, -3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ShockArea/Sprite:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.15, 0.35 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0.2, 0.2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ShockArea/Sprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.15, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ShockArea/Particles2D:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("ShockArea:monitoring")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.05, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Shadow:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.25, 0.25 ), Vector2( 0.0492303, 0.0952381 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Shadow:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.356863 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("ShockArea/Particles2D:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.25, 0.25 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("ShockArea:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.05, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Shadow:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -0.5, 10 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "will_explode"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.2, 0.225, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1e+06, 1e+06 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.06107, 1.07634 ), Vector2( 1.19871, 1.2293 ), Vector2( 0.932173, 0.686293 ), Vector2( 1.06558, 1.02516 ), Vector2( 1.29208, 1.02516 ), Vector2( 0.643339, 1.02516 ), Vector2( 0.643339, 1.33588 ), Vector2( 1.35878, 0.451664 ), Vector2( 0.832061, 1.33443 ), Vector2( 1.20547, 0.383308 ), Vector2( 1.68974, 1.68637 ), Vector2( 1.51306, 1.22287 ), Vector2( 1.80314, 1.87936 ), Vector2( 0.746589, 0.884575 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.025, 0.05, 0.075, 0.1, 0.15, 0.225, 0.3, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, -1 ), Vector2( 1.75, -2.5 ), Vector2( -3.75, -4 ), Vector2( -5.75, 1 ), Vector2( 4.75, -4 ), Vector2( -13.5, -1 ), Vector2( -13.5, -19 ), Vector2( 1.5, 13.5 ), Vector2( -1, -1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Shadow:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 12 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=18]
+radius = 115.0
+
+[sub_resource type="Gradient" id=11]
+offsets = PoolRealArray( 0, 0.133333, 0.283333, 0.74, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.992188, 1, 0, 1, 1, 0.304688, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, 0.74375, 0, 0, Vector2( 1, 0.0147727 ), -3.70909, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+emission_shape = 1
+emission_sphere_radius = 6.99
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 432.75
+angular_velocity = 92.63
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 23.39
+scale = 4.0
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 12 )
+hue_variation = 1.0
+
+[node name="Bomb" instance=ExtResource( 1 )]
+script = ExtResource( 7 )
+damage = 30
+points = 0
+
+[node name="DetectionArea" parent="." index="0"]
+visible = false
+
+[node name="CollisionShape2D" parent="DetectionArea" index="0"]
+shape = SubResource( 15 )
+
+[node name="AttackArea" parent="." index="1"]
+visible = false
+
+[node name="CollisionShape2D" parent="AttackArea" index="0"]
+shape = SubResource( 16 )
+
+[node name="Shadow" parent="." index="2"]
+position = Vector2( 0, 2.38419e-07 )
+scale = Vector2( 0.148148, 0.172619 )
+
+[node name="CollisionShape2D" parent="." index="3"]
+visible = false
+position = Vector2( 1, 1 )
+shape = SubResource( 17 )
+
+[node name="Sprite" parent="." index="4"]
+texture = ExtResource( 5 )
+
+[node name="Alert" parent="Sprite" index="0"]
+visible = false
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" parent="." index="7"]
+anims/explode = SubResource( 3 )
+anims/will_explode = SubResource( 13 )
+
+[node name="DieSound" parent="." index="8"]
+stream = ExtResource( 3 )
+
+[node name="Path2D" parent="." index="9"]
+scale = Vector2( 1, 1 )
+
+[node name="ShockArea" type="Area2D" parent="." index="10"]
+visible = false
+collision_layer = 0
+collision_mask = 3
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="ShockArea" index="0"]
+modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShockArea" index="1"]
+shape = SubResource( 18 )
+
+[node name="Particles2D" type="Particles2D" parent="ShockArea" index="2"]
+scale = Vector2( 0.25, 0.25 )
+emitting = false
+amount = 100
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.6
+process_material = SubResource( 6 )
+texture = ExtResource( 6 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." index="16"]
+scale = Vector2( 1, 1.2 )
+
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+
+[editable path="Path2D"]
+[editable path="Experience"]
