@@ -3,8 +3,9 @@ A game project, about a rouge-like dimensions game, where you have to fight with
 
 The game is mainly written in GDScript.
 
-# How to download
+## Bugs or Problems
+If you have found any bugs, feel free to create an issue.
+
+## How to download
 1. Go to the "Releases"-Tab on the right.
 2. Download the game and enjoy testing.
-
-If you have found any bugs, feel free to create an issue.
