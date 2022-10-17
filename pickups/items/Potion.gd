@@ -1,4 +1,3 @@
-# Increases the robot's health when collected.
 extends Pickup
 
 var floating_text = preload("res://interface/floating_text/FloatingText.tscn")

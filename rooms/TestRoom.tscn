@@ -71,7 +71,6 @@ scale = Vector2( 0.85, 0.85 )
 script = ExtResource( 11 )
 
 [node name="Potion" parent="YSort/Items" instance=ExtResource( 13 )]
-visible = false
 position = Vector2( 138.824, 178.824 )
 scale = Vector2( 1.176, 1.176 )
 

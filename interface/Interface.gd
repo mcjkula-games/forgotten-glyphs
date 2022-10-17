@@ -24,10 +24,6 @@ func _process(delta):
 	
 	fps_label.text = "FPS: " + str(Engine.get_frames_per_second())
 
-func _input(event):
-	if event.is_action_pressed("ui_inventory"):
-		$Inventory.visible = !$Inventory.visible
-
 func set_stats(new_stats: CharacterStats) -> void:
 	stats = new_stats
 	ignore_value_change = true
