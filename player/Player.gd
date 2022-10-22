@@ -30,8 +30,8 @@ onready var _camera: ShakingCamera2D = $ShakingCamera2D
 onready var _damage_audio = $DamageAudio
 onready var _death_audio = $DeathAudio
 onready var _skin := $Body
-onready var _weapon_holder := $WeaponHolder
-onready var _weapon_spawn := $WeaponHolder/WeaponSpawningPoint
+#onready var _weapon_holder := $WeaponHolder
+#onready var _weapon_spawn := $WeaponHolder/WeaponSpawningPoint
 onready var _animation_player := $Body/AnimationPlayer
 onready var _trail := $Body/Trail
 
@@ -67,23 +67,23 @@ func _physics_process(delta: float) -> void:
 	match state:
 		MOVE:
 			_skin.set_physics_process(true)
-			_weapon_spawn.get_child(0).set_physics_process(true)
+			#_weapon_spawn.get_child(0).set_physics_process(true)
 			move_state(delta)
 		ROLL:
 			roll_state(delta)
 		INTERACT:
-			_weapon_holder.hide()
+			#_weapon_holder.hide()
 			if Input.is_action_just_pressed("use, interact"):
 				interaction_manager.initiate_interaction()
 			_skin.set_physics_process(false)
-			_weapon_spawn.get_child(0).set_physics_process(false)
+			#_weapon_spawn.get_child(0).set_physics_process(false)
 	
-	if Input.is_action_pressed("secondary_attack") and not _weapon_holder.selected_weapon == 2:
-		_weapon_spawn.global_position = _weapon_holder.global_position
-		_weapon_holder.set_physics_process(false)
-	else:
-		_weapon_spawn.position = Vector2(17, 0)
-		_weapon_holder.set_physics_process(true)
+	#if Input.is_action_pressed("secondary_attack") and not _weapon_holder.selected_weapon == 2:
+	#	_weapon_spawn.global_position = _weapon_holder.global_position
+	#	_weapon_holder.set_physics_process(false)
+	#else:
+	#	_weapon_spawn.position = Vector2(17, 0)
+	#	_weapon_holder.set_physics_process(true)
 
 func move_state(delta) -> void:
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -149,7 +149,7 @@ func take_damage(amount: int) -> void:
 		# We play the death animation and sound too.
 		_skin.die()
 		_death_audio.play()
-		_weapon_holder.hide()
+		#_weapon_holder.hide()
 		#_spell_holder.hide()
 	else:
 		_damage_audio.play()
@@ -165,7 +165,7 @@ func roll_animation_finished():
 	state = MOVE
 
 func on_dialogue_finished() -> void:
-	_weapon_holder.show()
+	#_weapon_holder.show()
 	state = MOVE
 
 func move() -> void:

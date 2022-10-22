@@ -1,4 +1,4 @@
-class_name SworddWeapon
+class_name SwordWeapon
 extends Weapon
 
 var swing_animation_index := [

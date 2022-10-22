@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sword_2.png-8a1a3267f6a8f36cdc775561f5142185.stex"
+path="res://.import/HurtBox.svg-8058b8ba0f70648a972f09aa16f14078.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://weapons/sword/sword_2.png"
-dest_files=[ "res://.import/sword_2.png-8a1a3267f6a8f36cdc775561f5142185.stex" ]
+source_file="res://overlap/hurtbox/HurtBox.svg"
+dest_files=[ "res://.import/HurtBox.svg-8058b8ba0f70648a972f09aa16f14078.stex" ]
 
 [params]
 

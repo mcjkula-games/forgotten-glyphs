@@ -8,16 +8,16 @@ export var critical_chance := 1.0
 var current_animation_index := 0
 var crit_happened = false
 
-onready var _animation_player := $AnimationPlayer
-onready var _audio := $AudioStreamPlayer2D
+#onready var _animation_player := $AnimationPlayer
+#onready var _audio := $AudioStreamPlayer2D
 # The cool down timer can be used to prevent firing very rapidly
-onready var _cooldown_timer := $CoolDownTimer
+#onready var _cooldown_timer := $CoolDownTimer
 onready var weapon_area := $Hitbox
 
 onready var parent := get_node("../../")
 
 func _ready() -> void:
-	_cooldown_timer.wait_time = 1.0 / speed
+	#_cooldown_timer.wait_time = 1.0 / speed
 	
 # warning-ignore:return_value_discarded
 	weapon_area.connect("body_entered", self, "_on_body_entered")

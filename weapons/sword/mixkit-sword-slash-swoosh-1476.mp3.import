@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/mixkit-sword-slash-swoosh-1476.mp3-1f91c8377314940aeb6f064cbe2bd943.mp3str"
+
+[deps]
+
+source_file="res://weapons/sword/mixkit-sword-slash-swoosh-1476.mp3"
+dest_files=[ "res://.import/mixkit-sword-slash-swoosh-1476.mp3-1f91c8377314940aeb6f064cbe2bd943.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

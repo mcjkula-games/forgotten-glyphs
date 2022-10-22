@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sword_1.png-0465cd1d72f79266f86b1940f1a77caf.stex"
+path="res://.import/slash_effect_anim_spritesheet.png-578ce588bb9ec69f803fbcf7ee2aaa20.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://weapons/sword/sword_1.png"
-dest_files=[ "res://.import/sword_1.png-0465cd1d72f79266f86b1940f1a77caf.stex" ]
+source_file="res://weapons/sword-old/slash_effect_anim_spritesheet.png"
+dest_files=[ "res://.import/slash_effect_anim_spritesheet.png-578ce588bb9ec69f803fbcf7ee2aaa20.stex" ]
 
 [params]
 
