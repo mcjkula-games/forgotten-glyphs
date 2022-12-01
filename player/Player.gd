@@ -25,6 +25,7 @@ var roll_direction = Vector2.DOWN
 
 var floating_numbers = preload("res://interface/floating_text/FloatingText.tscn")
 var level_up_anim := preload("res://interface/floating_level/FloatingLevel.tscn")
+var ghost_scene := preload("res://DashGhost.tscn")
 
 onready var _camera: ShakingCamera2D = $ShakingCamera2D
 onready var _damage_audio = $DamageAudio
@@ -33,13 +34,12 @@ onready var _skin := $Body
 #onready var _weapon_holder := $WeaponHolder
 #onready var _weapon_spawn := $WeaponHolder/WeaponSpawningPoint
 onready var _animation_player := $Body/AnimationPlayer
-onready var _trail := $Body/Trail
 
 onready var _health_timer := $Timers/HealthRegenarationTimer
 onready var _stamina_timer := $Timers/StaminaRegenarationTimer
 
 onready var interaction_manager := $InteractionManager
-#onready var _spell_holder := $SpellHolder
+onready var _spell_holder := $SpellHolder
 
 func _ready() -> void:
 	#Events.emit_signal("player_health", max_health)
@@ -110,8 +110,15 @@ func move_state(delta) -> void:
 			state = INTERACT
 
 func roll_state(_delta):
+	var ghost: Sprite = ghost_scene.instance()
+	
 	velocity = roll_direction * roll_speed
-	if not _trail.flip_h:
+	get_parent().add_child(ghost)
+	ghost.texture = _skin.texture
+	ghost.global_position = self.global_position
+	ghost.flip_h = _skin.flip_h
+	
+	if Vector2.RIGHT:
 		_animation_player.play("right_roll")
 	else:
 		_animation_player.play("left_roll")
@@ -123,7 +130,7 @@ func _on_health_regen() -> void:
 
 func _on_stamina_regen() -> void:
 	if not stats.stamina >= 100:
-		stats.stamina += 1
+		stats.stamina += 2.5
 
 # Called by the Teleport node when we walk over it. This jumps to the win screen
 # scene.
@@ -150,7 +157,7 @@ func take_damage(amount: int) -> void:
 		_skin.die()
 		_death_audio.play()
 		#_weapon_holder.hide()
-		#_spell_holder.hide()
+		_spell_holder.hide()
 	else:
 		_damage_audio.play()
 		_camera.shake_intensity += 0.6

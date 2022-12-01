@@ -9,10 +9,10 @@ radius = 65.0547
 
 [sub_resource type="CircleShape2D" id=12]
 resource_local_to_scene = true
-radius = 15.5
+radius = 14.004
 
 [sub_resource type="CircleShape2D" id=13]
-radius = 13.5
+radius = 12.0
 
 [sub_resource type="Animation" id=10]
 resource_name = "hit"

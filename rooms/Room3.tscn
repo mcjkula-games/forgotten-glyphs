@@ -1,0 +1,140 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://weapons/book/dungeon-room.tres" type="TileSet" id=1]
+[ext_resource path="res://props/escape_stone_disabled.png" type="Texture" id=2]
+[ext_resource path="res://rooms/EndRoom.gd" type="Script" id=3]
+[ext_resource path="res://props/escape_stone_enabled.png" type="Texture" id=4]
+[ext_resource path="res://resources/tres/hidden_tileset.tres" type="TileSet" id=5]
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 7.2
+height = 0.0
+
+[sub_resource type="Environment" id=4]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 1.0
+glow_hdr_threshold = 1.5
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 8 )
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 40.0
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.518293, 1 )
+colors = PoolColorArray( 0.15501, 0.765384, 0.922852, 1, 1, 1, 1, 1, 0.0828552, 0.475501, 0.883789, 1 )
+
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+emission_shape = 5
+emission_ring_radius = 40.0
+emission_ring_inner_radius = 0.0
+emission_ring_height = 0.0
+emission_ring_axis = Vector3( 0, 0, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 1.01
+color = Color( 1.5, 1.5, 1.5, 1 )
+color_ramp = SubResource( 7 )
+
+[node name="Room" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+cell_size = 16.0
+navigation_layers = 0
+
+[node name="TileMap" type="TileMap" parent="Navigation2D"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+show_collision = true
+collision_layer = 179
+collision_mask = 129
+bake_navigation = true
+format = 1
+tile_data = PoolIntArray( 5, 39, 0, 6, 37, 0, 7, 37, 0, 8, 37, 0, 9, 37, 0, 10, 37, 0, 11, 37, 0, 12, 37, 0, 13, 37, 0, 14, 40, 0, 65541, 41, 0, 65542, 16, 0, 65543, 16, 0, 65544, 16, 0, 65545, 16, 0, 65546, 16, 0, 65547, 16, 0, 65548, 16, 0, 65549, 16, 0, 65550, 42, 0, 131076, 39, 0, 131077, 33, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 0, 0, 131086, 34, 0, 131087, 40, 0, 196612, 41, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196623, 42, 0, 262148, 41, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 262159, 42, 0, 327684, 41, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 42, 0, 393220, 41, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 393229, 0, 0, 393230, 0, 0, 393231, 42, 0, 458756, 41, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 42, 0, 524292, 41, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 42, 0, 589828, 41, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589839, 42, 0, 655365, 41, 0, 655366, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 0, 0, 655370, 0, 0, 655371, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 42, 0, 720904, 41, 0, 720905, 0, 0, 720906, 0, 0, 720907, 42, 0, 786440, 41, 0, 786441, 0, 0, 786442, 0, 0, 786443, 42, 0 )
+
+[node name="TileMap2" type="TileMap" parent="Navigation2D"]
+z_index = 1
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+show_collision = true
+collision_layer = 179
+collision_mask = 129
+bake_navigation = true
+format = 1
+tile_data = PoolIntArray( 589829, 37, 0, 589838, 37, 0, 655366, 37, 0, 655367, 37, 0, 655368, 49, 0, 655371, 49, 0, 655372, 37, 0, 655373, 37, 0 )
+
+[node name="TileMap3" type="TileMap" parent="Navigation2D"]
+z_index = 1
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 16, 16 )
+show_collision = true
+collision_layer = 51
+bake_navigation = true
+format = 1
+tile_data = PoolIntArray( 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 65547, 0, 0, 65548, 0, 0, 65549, 0, 0, 65550, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 0, 0, 131086, 0, 0, 131087, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196623, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 262159, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 393229, 0, 0, 393230, 0, 0, 393231, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589839, 0, 0, 655365, 0, 0, 655366, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 0, 0, 655370, 0, 0, 655371, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 0, 0, 720904, 0, 0, 720905, 0, 0, 720906, 0, 0, 720907, 0, 0, 786440, 0, 0, 786441, 0, 0, 786442, 0, 0, 786443, 0, 0, 851977, 0, 0, 851978, 0, 0, 917513, 0, 0, 917514, 0, 0 )
+
+[node name="Entrance" type="Node2D" parent="."]
+
+[node name="Position2D" type="Position2D" parent="Entrance"]
+position = Vector2( 152, 184 )
+
+[node name="Position2D2" type="Position2D" parent="Entrance"]
+position = Vector2( 168, 184 )
+
+[node name="PlayerSpawnPos" type="Position2D" parent="."]
+position = Vector2( 160, 96 )
+
+[node name="Area2D2" type="Area2D" parent="."]
+position = Vector2( 160, 96 )
+scale = Vector2( 1.25, 1.25 )
+collision_layer = 115
+collision_mask = 115
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2( 0.799988, 3.99999 )
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Area2D2"]
+texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="Area2D2"]
+modulate = Color( 2, 2, 2, 1 )
+texture = ExtResource( 4 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Area2D2"]
+environment = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 160, 168 )
+shape = SubResource( 2 )
+
+[node name="Detect" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detect"]
+visible = false
+position = Vector2( 160, 96 )
+shape = SubResource( 5 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 160, 96 )
+emitting = false
+amount = 48
+process_material = SubResource( 8 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true

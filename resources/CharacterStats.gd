@@ -1,10 +1,11 @@
 class_name CharacterStats
 extends Resource
 
+export var name = 'name'
 # The health property uses a setter to ensure that it never goes above
 # max_health or below 0.
 export var max_health := 50 setget set_max_health
-var health = max_health setget set_health
+var health = 50 setget set_health
 
 export(int) var level = 1
 
@@ -38,7 +39,6 @@ func set_health(new_health: int) -> void:
 
 func update_max_health() -> void:
 	max_health = max_health
-	set_health(max_health)
 
 func max_health_changer(new_max_health: int) -> void:
 	max_health = new_max_health
@@ -55,6 +55,7 @@ func level_up():
 	# For each level up we add 25% health based on the current_health
 	max_health = max_health + (max_health * (0.2 / (level / 2)))
 	update_max_health()
+	set_health(max_health)
 
 func gain_experience(amount):
 	experience_total += amount

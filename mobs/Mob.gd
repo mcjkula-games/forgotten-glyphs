@@ -42,6 +42,9 @@ var floating_text = preload("res://interface/floating_text/FloatingText.tscn")
 var crit_type = false
 
 onready var root = get_node("../../../")
+onready var player = root.get_node("YSort/Player")
+onready var room = get_node("../")
+onready var items = root.get_node("YSort/Items")
 
 onready var _detection_area := $DetectionArea
 # Detects when player is within attack range; smaller than detection area.
@@ -63,10 +66,11 @@ onready var _shadow := $Shadow
 onready var _animation_player := $AnimationPlayer
 onready var _hurt_sound := $HurtSound
 
-onready var _tween_e := $TweenE as Tween
-onready var _tween_p := $TweenP as Tween
-onready var _path_experience := $Experience/PathFollow2D as PathFollow2D
-onready var _path_pickup := $Path2D/PathFollow2D as PathFollow2D
+#onready var _tween_e := $TweenE as Tween
+#onready var _tween_p := $TweenP as Tween
+#onready var _experience_node := $Experience
+#onready var _path_experience := $Experience/PathFollow2D as PathFollow2D
+#onready var _path_pickup := $Path2D/PathFollow2D as PathFollow2D
 
 onready var _timer := $Timer
 
@@ -101,14 +105,15 @@ func _ready() -> void:
 	visible = false
 
 func _process(_delta):
-	var children = _path_pickup.get_children()
-	for childs in children:
-		var items_layer = root.get_child(2)
-	
-		_path_pickup.remove_child(childs)
-		items_layer.call_deferred("add_child", childs)
-		
-		childs.global_position = self.global_position * 1.176
+	#var children = _path_pickup.get_children()
+	#for childs in children:
+	#	var items_layer = root.get_child(2)
+	#
+	#	_path_pickup.remove_child(childs)
+	#	items_layer.call_deferred("add_child", childs)
+	#	
+	#	childs.global_position = self.global_position * 1.176
+	pass
 
 # This function can be used to know if the mob can attack.
 #
@@ -153,6 +158,8 @@ func _on_crit_type_f() -> void:
 
 # Called by bullets.
 func take_damage(amount: int) -> void:
+	_hurt_sound.pitch_scale = rand_range(0.8, 1.2)
+	
 	health -= amount
 	if health <= 0:
 		_die()
@@ -183,20 +190,23 @@ func update_stats() -> void:
 func _die() -> void:
 	#Events.emit_signal("mob_died", points)
 	_create_experience()
+	_create_pickup()
 	
 	_disable()
 	_animation_player.play("die")
 	_die_sound.play()
 
 func _create_experience() -> void:
-	for p in (points / 5.0):
-		var experience = EXPERIENCE[randi() % EXPERIENCE.size()].instance()
-		_path_experience.call_deferred("add_child", experience)
-		experience.scale = Vector2(25.0, 12.5)
+	Events.emit_signal("experience_collected", points)
+	#for p in (points / 5.0):
+	#	var experience = EXPERIENCE[randi() % EXPERIENCE.size()].instance()
+	#	_path_experience.call_deferred("add_child", experience)
+	#	experience.scale = Vector2(1.0, 1.0)
 
 func _create_pickup() -> void:
 	var loot = LOOT_SCENES[randi() % LOOT_SCENES.size()].instance()
-	_path_pickup.call_deferred("add_child", loot)
+	loot.global_position = self.global_position
+	items.call_deferred("add_child", loot)
 
 # Disables the mob. We remove anything that can trigger collisions again and
 # leave the monster as an invisible wall. This is useful if you want to play

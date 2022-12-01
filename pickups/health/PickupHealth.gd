@@ -12,6 +12,7 @@ func _ready() -> void:
 	item_name = "Potion"
 
 func _on_player_pickup(player: Player) -> void:
+	_light.visible = false
 	var text = floating_text.instance()
 	
 	if player.stats.health != player.stats.max_health:
@@ -25,5 +26,5 @@ func _on_player_pickup(player: Player) -> void:
 		_disable()
 		_animation_player.play("destroy")
 	elif not destroying:
-		_animation_player.play("idle (full_health)")
-		_animation_player.queue("idle")
+		#_animation_player.play("idle (full_health)")
+		_animation_player.play("idle")

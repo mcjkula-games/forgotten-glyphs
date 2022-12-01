@@ -1,0 +1,128 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://weapons/Fireball.gd" type="Script" id=1]
+[ext_resource path="res://overlap/hitbox/Hitbox.gd" type="Script" id=2]
+[ext_resource path="res://weapons/book/fireball/fireball_1.png" type="Texture" id=3]
+[ext_resource path="res://weapons/book/fireball/fireball_2.png" type="Texture" id=4]
+[ext_resource path="res://weapons/book/fireball/fireball_3.png" type="Texture" id=5]
+[ext_resource path="res://weapons/book/fireball/fireball_4.png" type="Texture" id=6]
+[ext_resource path="res://weapons/book/fireball.tres" type="Animation" id=7]
+[ext_resource path="res://light.png" type="Texture" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "Fireball",
+"speed": 8.0
+} ]
+
+[sub_resource type="ShaderMaterial" id=2]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 6, 5 )
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Curve" id=6]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, 360 ), 0.0, -111.273, 0, 0, Vector2( 1, -360 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.426829, 1 )
+colors = PoolColorArray( 1, 0.756863, 0.027451, 1, 1, 0.596078, 0, 1, 1, 0.341176, 0.133333, 1 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="Curve" id=10]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 10 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+emission_shape = 1
+emission_sphere_radius = 5.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 125.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle_curve = SubResource( 7 )
+scale = 3.0
+scale_random = 1.0
+scale_curve = SubResource( 11 )
+color_ramp = SubResource( 9 )
+
+[node name="Fireball" type="Node2D"]
+script = ExtResource( 1 )
+speed = 200.0
+lifetime = 0.75
+
+[node name="Light2D" type="Light2D" parent="."]
+z_index = 4096
+texture = ExtResource( 8 )
+texture_scale = 0.7
+color = Color( 1, 0.596078, 0, 1 )
+energy = 0.2
+shadow_enabled = true
+shadow_gradient_length = 3.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 1.75, 1.75, 1.75, 1 )
+position = Vector2( 22, 0 )
+frames = SubResource( 1 )
+animation = "Fireball"
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 146
+script = ExtResource( 2 )
+damage = 5
+critical_chance = 15.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+self_modulate = Color( 0.376471, 0.376471, 0.439216, 1 )
+material = SubResource( 2 )
+position = Vector2( 15, 0 )
+shape = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/New Anim" = ExtResource( 7 )
+anims/RESET = SubResource( 5 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 15, 0 )
+emitting = false
+amount = 25
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 12 )
+
+[node name="Lifetime" type="Timer" parent="."]
+one_shot = true

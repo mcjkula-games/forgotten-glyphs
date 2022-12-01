@@ -15,6 +15,7 @@ var destroying = false
 onready var _audio := $AudioStreamPlayer2D
 onready var _animation_player := $AnimationPlayer
 onready var _pickup_area := $PickupArea
+onready var _light := $Light2D
 
 # ANCHOR: ready_connect
 func _ready() -> void:

@@ -1,27 +1,52 @@
 extends Node2D
 
-onready var _pivot := $Pivot
+const MeleeProjectile := preload("res://weapons/sword/MeleeProjectile.tscn")
+
 onready var _attack_sound := $AudioStreamPlayer
 onready var _animation_player := $AnimationPlayer
+onready var _shoot_position := $Position2D
+onready var _cooldown_timer := $CoolDownTimer
 
+export var speed := 1.0
+
+onready var parent := get_node("../../")
+onready var player := get_node("../../../")
+
+func _ready():
+	_cooldown_timer.wait_time = 1.0 / speed
 
 func use() -> void:
+	_cooldown_timer.start()
 	_attack_sound.pitch_scale = rand_range(1.7, 2.6)
 	_animation_player.play("slash")
 
-
+# warning-ignore:unused_argument
 func _physics_process(delta: float) -> void:
 	var mouse_position := get_global_mouse_position()
-
-	_pivot.look_at(mouse_position)
-	_pivot.position.y = sin(OS.get_ticks_msec() * delta * 0.20) * 10
-
-	# Flip pivot to avoid upside down attacks
+	_rotation()
+	
 	if mouse_position.x - global_position.x < 0:
-		_pivot.scale.y = -1
+		self.scale.y = -1.12
 	else:
-		_pivot.scale.y = 1
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("attack"):
+		self.scale.y = 1.12
+	
+	if Input.is_action_pressed("attack") and _cooldown_timer.is_stopped():
 		use()
+		shoot(MeleeProjectile)
+
+func _rotation():
+	if parent.rotation_degrees > 360:
+		parent.rotation_degrees = 0
+	if parent.rotation_degrees < 0:
+		parent.rotation_degrees = 360
+	
+	if parent.rotation_degrees < 25 or parent.rotation_degrees > 170:
+		parent.show_behind_parent = true
+	else:
+		parent.show_behind_parent = false
+
+func shoot(projectile: PackedScene) -> void:
+	var projectile_instance := projectile.instance()
+	projectile_instance.position = _shoot_position.global_position
+	projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
+	add_child(projectile_instance)

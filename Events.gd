@@ -14,6 +14,11 @@
 extends Node
 
 # warning-ignore:unused_signal
+signal save_game()
+# warning-ignore:unused_signal
+signal create_new_game()
+
+# warning-ignore:unused_signal
 signal selected_spell_changed(new_selected_spell_scene)
 # warning-ignore:unused_signal
 signal selected_weapon_changed(new_selected_weapon_scene)
@@ -33,6 +38,15 @@ signal player_health_changed(new_health)
 signal player_health(_health)
 # warning-ignore:unused_signal
 signal player_stamina_changed(new_stamina)
+
+# warning-ignore:unused_signal
+signal current_floor_changed(current_floor)
+# warning-ignore:unused_signal
+signal floor_changed()
+# warning-ignore:unused_signal
+signal enemies_diff_changed(enemies_diff)
+# warning-ignore:unused_signal
+signal get_enemies_count(enemies_count)
 
 # warning-ignore:unused_signal
 signal crit_happened_t()

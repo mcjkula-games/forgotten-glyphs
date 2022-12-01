@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://interface/fonts/Pixellari.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://interface/fonts/pixellari.tres" type="DynamicFont" id=2]
+[ext_resource path="res://MainMenu.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.12549, 0.12549, 0.12549, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -45.0
+margin_top = -60.0
+margin_right = 45.0
+margin_bottom = 77.0
+custom_constants/separation = 10
+
+[node name="ROGUELIKE" type="Label" parent="VBoxContainer"]
+margin_right = 90.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 2 )
+text = "ROUGELIKE"
+align = 1
+
+[node name="Seperation" type="Control" parent="VBoxContainer"]
+margin_top = 26.0
+margin_right = 90.0
+margin_bottom = 26.0
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+visible = false
+margin_top = 68.0
+margin_right = 90.0
+margin_bottom = 90.0
+focus_neighbour_left = NodePath("../../VBoxContainer2/Button")
+focus_neighbour_top = NodePath("../QuitButton")
+focus_neighbour_bottom = NodePath("../NewButton")
+custom_fonts/font = SubResource( 1 )
+text = "Continue"
+
+[node name="NewButton" type="Button" parent="VBoxContainer"]
+margin_top = 36.0
+margin_right = 90.0
+margin_bottom = 58.0
+focus_neighbour_left = NodePath("../../VBoxContainer2/Button")
+focus_neighbour_top = NodePath("../PlayButton")
+focus_neighbour_bottom = NodePath("../QuitButton")
+custom_fonts/font = SubResource( 1 )
+text = "New"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+margin_top = 68.0
+margin_right = 90.0
+margin_bottom = 90.0
+focus_neighbour_left = NodePath("../../VBoxContainer2/Button")
+focus_neighbour_top = NodePath("../NewButton")
+focus_neighbour_bottom = NodePath("../PlayButton")
+custom_fonts/font = SubResource( 2 )
+text = "Quit"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_right = -295.0
+margin_bottom = -5.0
+alignment = 2
+
+[node name="Button" type="Button" parent="VBoxContainer2"]
+margin_top = 155.0
+margin_right = 20.0
+margin_bottom = 175.0
+focus_neighbour_right = NodePath("../../VBoxContainer/PlayButton")
+align = 0
+icon_align = 1

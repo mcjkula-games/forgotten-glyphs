@@ -1,8 +1,8 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://alternatives/for_use/robot/Skin.gd" type="Script" id=1]
-[ext_resource path="res://player/Player.png" type="Texture" id=2]
-[ext_resource path="res://weapons/sword/WeaponSword.tscn" type="PackedScene" id=3]
+[ext_resource path="res://player/player-new.png" type="Texture" id=2]
+[ext_resource path="res://weapons/book/SpellBook.tscn" type="PackedScene" id=3]
 [ext_resource path="res://props/RandomAudioPlayer2D.gd" type="Script" id=4]
 [ext_resource path="res://alternatives/for_use/robot/ShakingCamera2D.gd" type="Script" id=5]
 [ext_resource path="res://player/Player.gd" type="Script" id=6]
@@ -15,7 +15,8 @@
 [ext_resource path="res://alternatives/for_use/robot/death_01.wav" type="AudioStream" id=13]
 [ext_resource path="res://alternatives/for_use/robot/death_02.wav" type="AudioStream" id=14]
 [ext_resource path="res://alternatives/for_use/robot/death_03.wav" type="AudioStream" id=15]
-[ext_resource path="res://player/trail.png" type="Texture" id=16]
+[ext_resource path="res://light.png" type="Texture" id=16]
+[ext_resource path="res://alternatives/for_use/robot/SpellHolder.gd" type="Script" id=17]
 [ext_resource path="res://overlap/soft_collision/SoftCollisionComponent.tscn" type="PackedScene" id=18]
 [ext_resource path="res://overlap/intercation_manager/InteractionManager.tscn" type="PackedScene" id=19]
 
@@ -91,7 +92,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0.238095, 0.238095 ) ]
+"values": [ Vector2( 0.162257, 0.166666 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Shadow:modulate")
@@ -106,7 +107,7 @@ tracks/6/keys = {
 "values": [ Color( 1, 1, 1, 0.431373 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Body/Trail:position")
+tracks/7/path = NodePath("Shadow:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -115,31 +116,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("Body/Trail:scale")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0.00945075, 0.602976 ) ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("Body/Trail:visible")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"values": [ Vector2( -0.5, 8 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -229,7 +206,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.1, 0.65 ),
 "transitions": PoolRealArray( 0.574349, 2.46229, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.14815, 0.783067 ), Vector2( 0.0617284, -0.0141093 ) ]
+"values": [ Vector2( 0.162, 0.167 ), Vector2( 1.14815, 0.783067 ), Vector2( 0.0617284, -0.0141093 ) ]
 }
 tracks/7/type = "value"
 tracks/7/path = NodePath("Shadow:modulate")
@@ -278,42 +255,6 @@ tracks/0/keys = {
 "method": "roll_animation_finished"
 } ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Body/Trail:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.125, 0.249729 ),
-"transitions": PoolRealArray( 0.25, 2.5, 1 ),
-"update": 0,
-"values": [ Vector2( 2.32707, 0 ), Vector2( 11.5, 0 ), Vector2( 2.327, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Body/Trail:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.125, 0.25 ),
-"transitions": PoolRealArray( 0.25, 2.5, 1 ),
-"update": 0,
-"values": [ Vector2( 0.029865, 0.945081 ), Vector2( 0.126769, 0.945081 ), Vector2( 0.029865, 0.945081 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Body/Trail:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
 
 [sub_resource type="Animation" id=19]
 resource_name = "right_roll"
@@ -333,46 +274,13 @@ tracks/0/keys = {
 "method": "roll_animation_finished"
 } ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Body/Trail:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.125, 0.25 ),
-"transitions": PoolRealArray( 0.25, 2.5, 1 ),
-"update": 0,
-"values": [ Vector2( -2.65415, 0 ), Vector2( -11.6542, 0 ), Vector2( -2.65415, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Body/Trail:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.125, 0.25 ),
-"transitions": PoolRealArray( 0.25, 2.5, 1 ),
-"update": 0,
-"values": [ Vector2( 0.0262105, 0.945081 ), Vector2( 0.126769, 0.945081 ), Vector2( 0.0262105, 0.945081 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Body/Trail:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
+
+[sub_resource type="CircleShape2D" id=22]
+radius = 7.0
 
 [sub_resource type="CapsuleShape2D" id=18]
-radius = 4.5
-height = 12.0
+radius = 5.0
+height = 5.0
 
 [sub_resource type="CircleShape2D" id=21]
 radius = 5.5
@@ -382,10 +290,17 @@ position = Vector2( 161, 88 )
 collision_mask = 50
 script = ExtResource( 6 )
 
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 16 )
+texture_scale = 0.3
+energy = 0.5
+shadow_enabled = true
+shadow_gradient_length = 3.0
+shadow_filter = 3
+
 [node name="Body" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 offset = Vector2( 0, -2 )
-hframes = 4
 script = ExtResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Body"]
@@ -397,32 +312,36 @@ anims/idle = SubResource( 6 )
 anims/left_roll = SubResource( 20 )
 anims/right_roll = SubResource( 19 )
 
-[node name="Trail" type="Sprite" parent="Body"]
-visible = false
-modulate = Color( 0.870588, 0.305882, 0.305882, 0.784314 )
-show_behind_parent = true
-scale = Vector2( 0.00945075, 0.602976 )
-texture = ExtResource( 16 )
+[node name="SpellHolder" type="Area2D" parent="."]
+collision_mask = 0
+monitoring = false
+script = ExtResource( 17 )
+spell_scene = ExtResource( 3 )
 
-[node name="WeaponSword" parent="." instance=ExtResource( 3 )]
-position = Vector2( 8, 2 )
+[node name="SpellSpawningPoint" type="Position2D" parent="SpellHolder"]
+position = Vector2( 7, 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpellHolder"]
+visible = false
+position = Vector2( 0, 3 )
+shape = SubResource( 22 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2( 0.5, -1 )
+position = Vector2( 0, 2 )
 z_index = 2
 shape = SubResource( 18 )
 
 [node name="ShakingCamera2D" type="Camera2D" parent="."]
 position = Vector2( 0.5, 0 )
 current = true
-zoom = Vector2( 1.25, 1.25 )
+zoom = Vector2( 1.2, 1.2 )
 script = ExtResource( 5 )
 
 [node name="Shadow" parent="." instance=ExtResource( 7 )]
 modulate = Color( 1, 1, 1, 0.431373 )
-position = Vector2( 0.5, 10 )
-scale = Vector2( 0.238095, 0.238095 )
+position = Vector2( -0.5, 8 )
+scale = Vector2( 0.162257, 0.166666 )
 
 [node name="DamageAudio" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 0.5, 0 )

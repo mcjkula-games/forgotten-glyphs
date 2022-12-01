@@ -1,10 +1,45 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://interface/fonts/pixellari.tres" type="DynamicFont" id=1]
+[ext_resource path="res://vignette.png" type="Texture" id=2]
 [ext_resource path="res://interface/Interface.gd" type="Script" id=6]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D vignette;
+const vec3 noise_magic = vec3(0.06711056, 0.00583715, 52.9829189);
+uniform float debanding_dither;
+uniform float blur = 0.5;
+uniform float vignette_darkness = -0.05;
+
+void fragment() {
+	vec3 vignette_color = texture(vignette, UV).rgb;
+	
+	COLOR.rgb = textureLod(SCREEN_TEXTURE, SCREEN_UV, (blur - vignette_color.r) * 4.0).rgb;
+	COLOR.rgb *= texture(vignette, UV).rgb;
+	COLOR.rgb += vignette_darkness;
+	
+	float offset =  fract(noise_magic.z * fract(dot(FRAGCOORD.xy, noise_magic.xy)));
+	COLOR.rgb += vec3(offset, 1.0 - offset, offset) * debanding_dither;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/debanding_dither = null
+shader_param/blur = 0.5
+shader_param/vignette_darkness = -0.05
+shader_param/vignette = ExtResource( 2 )
 
 [node name="Interface" type="CanvasLayer"]
 script = ExtResource( 6 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.47451 )
 
 [node name="Health" type="Label" parent="."]
 margin_left = 3.0
@@ -12,7 +47,16 @@ margin_top = 3.0
 margin_right = 74.0
 margin_bottom = 19.0
 custom_fonts/font = ExtResource( 1 )
-text = "100 / 100"
+text = "012 / 345"
+align = 1
+
+[node name="Floor" type="Label" parent="."]
+margin_left = 126.0
+margin_top = 4.0
+margin_right = 197.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 1 )
+text = "Floor: 01"
 align = 1
 
 [node name="Stamina" type="Label" parent="."]
@@ -21,10 +65,11 @@ margin_top = 20.0
 margin_right = 71.0
 margin_bottom = 36.0
 custom_fonts/font = ExtResource( 1 )
-text = "100"
+text = "123"
 align = 1
 
 [node name="FPS" type="Label" parent="."]
+visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -98.0
@@ -38,10 +83,31 @@ align = 2
 [node name="Level" type="Label" parent="."]
 anchor_top = 0.5
 anchor_bottom = 0.5
+margin_left = 1.0
 margin_top = -7.0
-margin_right = 40.0
-margin_bottom = 7.0
+margin_right = 104.0
+margin_bottom = 47.0
 custom_fonts/font = ExtResource( 1 )
 text = "Level: 1
 Experience: 23
 Next Level: 45"
+
+[node name="Difficulty" type="Label" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 119.0
+margin_top = -70.0
+margin_right = 209.0
+margin_bottom = -54.0
+custom_fonts/font = ExtResource( 1 )
+text = "Difficulty: IV"
+
+[node name="Enemies" type="Label" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 233.0
+margin_top = 73.0
+margin_right = 315.0
+margin_bottom = 89.0
+custom_fonts/font = ExtResource( 1 )
+text = "Enemies: 1"

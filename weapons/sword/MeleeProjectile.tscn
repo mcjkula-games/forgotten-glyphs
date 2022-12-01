@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://weapons/sword/slash_effect_2.png" type="Texture" id=1]
+[ext_resource path="res://weapons/sword/slash_effect_1.png" type="Texture" id=2]
+[ext_resource path="res://weapons/MeleeProjectile.gd" type="Script" id=3]
+[ext_resource path="res://overlap/hitbox/Hitbox.gd" type="Script" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
+"loop": false,
+"name": "Aerial Splash",
+"speed": 8.0
+} ]
+
+[sub_resource type="ShaderMaterial" id=2]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 18.5781, 13.5 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 3 )
+speed = 25.0
+lifetime = 0.4
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 1.75, 1.75, 1.75, 1 )
+position = Vector2( 49, 0 )
+scale = Vector2( 3.76563, 1.57031 )
+frames = SubResource( 1 )
+animation = "Aerial Splash"
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 146
+script = ExtResource( 4 )
+damage = 10
+critical_chance = 15.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+self_modulate = Color( 0.376471, 0.376471, 0.439216, 1 )
+material = SubResource( 2 )
+position = Vector2( 37, 0 )
+shape = SubResource( 3 )
